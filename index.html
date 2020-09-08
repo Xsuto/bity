@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <h1>
-                    Wynik {{output}} {{outputType == 1 ? 'bitów' : 'bajtów'}}
+                    Wynik {{output}} {{suffix}}
                 </h1>
             </div>
         </div>
@@ -59,6 +59,16 @@
                             this.outputType
                         );
                     },
+                    suffix() {
+                        const suffix =
+                            this.outputType == 1 ? "bitów" : "bajtów";
+                        if (this.outputPrefix == 1) return suffix;
+                        if (this.outputPrefix == 1024) return "kilo" + suffix;
+                        if (this.outputPrefix == 1024 * 1024)
+                            return "mega" + suffix;
+                        if (this.outputPrefix == 1024 * 1024 * 1024)
+                            return "giga" + suffix;
+                    },
                 },
             });
         </script>
@@ -77,8 +87,8 @@
             }
             .content {
                 box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
-                width: 20vw;
-                height: 40vh;
+                width: 25vw;
+                height: 45vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
