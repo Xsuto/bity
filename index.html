@@ -53,11 +53,13 @@
                 },
                 computed: {
                     output() {
-                        return (
+                        const output =
                             (this.value * this.inputPrefix * this.inputType) /
                             this.outputPrefix /
-                            this.outputType
-                        );
+                            this.outputType;
+                        return output >= 1 || output == 0
+                            ? output
+                            : output.toFixed(8);
                     },
                     suffix() {
                         const suffix =
