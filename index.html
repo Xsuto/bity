@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="content">
+                <h1>Z</h1>
+                <div class="controls">
+                    <select v-model="inputPrefix">
+                        <option :value="1">brak</option>
+                        <option :value="1024">kilo</option>
+                        <option :value="1024 * 1024">mega</option>
+                        <option :value="1024 * 1024 * 1024">giga</option>
+                    </select>
+                    <select v-model="inputType">
+                        <option value="1">bit</option>
+                        <option value="8">bajt</option>
+                    </select>
+                </div>
+                <input v-model="value" />
+                <h1>Do</h1>
+                <div class="controls">
+                    <select v-model="outputPrefix">
+                        <option :value="1">brak</option>
+                        <option :value="1024">kilo</option>
+                        <option :value="1024 * 1024">mega</option>
+                        <option :value="1024 * 1024 * 1024">giga</option>
+                    </select>
+                    <select v-model="outputType">
+                        <option value="1">bit</option>
+                        <option value="8">bajt</option>
+                    </select>
+                </div>
+                <h1>
+                    Wynik {{output}} {{outputType == 1 ? 'bitów' : 'bajtów'}}
+                </h1>
+            </div>
+        </div>
+        <script>
+            const app = new Vue({
+                el: "#app",
+                data: {
+                    value: 0,
+                    inputType: 1,
+                    inputPrefix: 1,
+                    outputType: 1,
+                    outputPrefix: 1,
+                },
+                computed: {
+                    output() {
+                        return (
+                            (this.value * this.inputPrefix * this.inputType) /
+                            this.outputPrefix /
+                            this.outputType
+                        );
+                    },
+                },
+            });
+        </script>
+        <style>
+            body {
+                min-height: 100vh;
+            }
+            #app {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #555;
+                background-color: #ecf0f3;
+            }
+            .content {
+                box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+                width: 20vw;
+                height: 40vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px;
+            }
+            .controls {
+                padding: 1rem;
+            }
+            select {
+                border: none;
+                outline: none;
+                background: #535a5f;
+                border-radius: 4px;
+                color: #ffffff;
+            }
+            input {
+                outline: none;
+                background: none;
+                border: none;
+                box-shadow: inset 8px 8px 8px #cbced1,
+                    inset -8px -8px 8px #ffffff;
+                border-radius: 4px;
+                margin: 0 1rem;
+            }
+            @media screen and (max-width: 1200px) {
+                .content {
+                    width: 50vw;
+                    height: 70vh;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .content {
+                    width: 80vw;
+                    height: 90vh;
+                }
+            }
+        </style>
+    </body>
+</html>
